@@ -1,0 +1,6 @@
+@FtpApi_HostAddress = http://localhost:5019
+
+GET {{FtpApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

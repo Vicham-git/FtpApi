@@ -1,0 +1,26 @@
+version: "3"
+services:
+  ftp:
+    image: fauria/vsftpd
+    container_name: ftp_server
+    ports:
+      - "21:21"
+      - "20:20"
+      - "21100-21110:21100-21110"
+    environment:
+      - FTP_USER=user
+      - FTP_PASS=pass
+      - PASV_ADDRESS=localhost
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=21110
+    volumes:
+      - ./ftp_data:/home/vsftpd
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - ftp
